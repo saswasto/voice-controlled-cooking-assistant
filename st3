@@ -1,0 +1,148 @@
+import { useState, useEffect } from 'react'
+import { Button } from "/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "/components/ui/card"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "/components/ui/select"
+
+export default function CookingAssistant() {
+  const [currentStep, setCurrentStep] = useState(0)
+  const [recipes, setRecipes] = useState([
+    {
+      title: 'Grilled Chicken with Vegetables',
+      steps: [
+        'Preheat grill to medium-high heat.',
+        'Season chicken with salt, pepper, and your favorite herbs.',
+        'Grill chicken for 5-6 minutes per side, or until cooked through.',
+        'Grill vegetables for 3-4 minutes per side, or until tender.',
+        'Serve hot and enjoy!',
+      ],
+    },
+    {
+      title: 'Spaghetti Bolognese',
+      steps: [
+        'Cook spaghetti in boiling water until al dente.',
+        'Heat olive oil in a large saucepan over medium heat.',
+        'Add onion, garlic, and ground beef. Cook until browned.',
+        'Add tomato sauce, salt, and pepper. Simmer for 10-15 minutes.',
+        'Serve spaghetti with bolognese sauce and parmesan cheese.',
+      ],
+    },
+    {
+      title: 'Roasted Chicken with Potatoes',
+      steps: [
+        'Preheat oven to 425°F (220°C).',
+        'Season chicken with salt, pepper, and your favorite herbs.',
+        'Roast chicken in the oven for 45-50 minutes, or until cooked through.',
+        'Toss potatoes with olive oil, salt, and pepper. Roast in the oven for 20-25 minutes, or until tender.',
+        'Serve hot and enjoy!',
+      ],
+    },
+    {
+      title: 'Veggie Stir-Fry',
+      steps: [
+        'Heat olive oil in a large skillet or wok over medium-high heat.',
+        'Add your favorite vegetables (e.g., broccoli, bell peppers, carrots). Cook until tender.',
+        'Add soy sauce, garlic, and ginger. Stir-fry for 1-2 minutes.',
+        'Serve hot over rice or noodles.',
+        'Enjoy your delicious veggie stir-fry!',
+      ],
+    },
+  ])
+  const [currentRecipeIndex, setCurrentRecipeIndex] = useState(0)
+  const [listening, setListening] = useState(false)
+  const [speechRecognition, setSpeechRecognition] = useState(null)
+  const [voiceReply, setVoiceReply] = useState('')
+
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    const recognition = new SpeechRecognition()
+
+    recognition.onstart = () => {
+      setListening(true)
+    }
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript
+      handleVoiceCommand(transcript)
+    }
+
+    recognition.onerror = (event) => {
+      console.error('Error occurred while recognizing speech:', event)
+    }
+
+    recognition.onend = () => {
+      setListening(false)
+    }
+
+    recognition.lang = 'en-US'
+    recognition.maxResults = 10
+    recognition.continuous = false
+    recognition.interimResults = false
+
+    setSpeechRecognition(recognition)
+  }, [])
+
+  const handleRecipeChange = (index: number) => {
+    setCurrentRecipeIndex(index)
+    setCurrentStep(0)
+  }
+
+  const handleVoiceCommand = (transcript: string) => {
+    transcript = transcript.toLowerCase()
+
+    if (transcript.includes('next')) {
+      setCurrentStep((prevStep) => Math.min(prevStep + 1, recipes[currentRecipeIndex].steps.length - 1))
+      setVoiceReply('Moving to the next step.')
+    } else if (transcript.includes('previous')) {
+      setCurrentStep((prevStep) => Math.max(prevStep - 1, 0))
+      setVoiceReply('Moving to the previous step.')
+    } else if (transcript.includes('change recipe')) {
+      setCurrentRecipeIndex((prevIndex) => (prevIndex + 1) % recipes.length)
+      setCurrentStep(0)
+      setVoiceReply('Changing to a new recipe.')
+    } else if (transcript.includes('what is the current step')) {
+      setVoiceReply(`The current step is ${currentStep + 1} of ${recipes[currentRecipeIndex].steps.length}.`)
+    } else if (transcript.includes('what is the current recipe')) {
+      setVoiceReply(`The current recipe is ${recipes[currentRecipeIndex].title}.`)
+    } else {
+      setVoiceReply('Sorry, I did not understand that command.')
+    }
+
+    const speechSynthesis = window.speechSynthesis
+    const speech = new SpeechSynthesisUtterance(voiceReply)
+    speech.lang = 'en-US'
+    speechSynthesis.speak(speech)
+  }
+
+  const startListening = () => {
+    if (speechRecognition && !listening) {
+      speechRecognition.start()
+      setListening(true)
+    }
+  }
+
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold">{recipes[currentRecipeIndex].title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="text-lg font-bold mb-4">Step {currentStep + 1} of {recipes[currentRecipeIndex].steps.length}</div>
+        <div className="text-lg mb-4">{recipes[currentRecipeIndex].steps[currentStep]}</div>
+        <div className="flex space-x-2">
+          <Button onClick={() => setCurrentStep((prevStep) => Math.max(prevStep - 1, 0))}>Previous</Button>
+          <Button onClick={() => setCurrentStep((prevStep) => Math.min(prevStep + 1, recipes[currentRecipeIndex].steps.length - 1))}>Next</Button>
+        </div>
+        <div className="flex flex-wrap justify-center gap-4 mt-4">
+          {recipes.map((recipe, index) => (
+            <Button key={recipe.title} onClick={() => handleRecipeChange(index)} className="w-40 h-12">{recipe.title}</Button>
+          ))}
+        </div>
+        <Button onClick={startListening} className="mt-4">{listening ? 'Stop Listening' : 'Click to start listening'}</Button>
+        <div className="text-lg font-bold mt-4">Voice Reply: {voiceReply}</div>
+      </CardContent>
+    </Card>
+  )
+}
+Share
+Refresh
+
