@@ -1,13 +1,18 @@
+voice controlled cooking assistant: 
+
+Overview
+The Voice-Controlled Cooking Assistant is a cross-platform mobile application designed to deliver a truly hands-free cooking experience. Built with React Native (or Flutter), the app integrates advanced voice recognition and transcription technologies, allowing users to navigate recipes, set timers, and save or share their favorite dishes—all through natural voice commands.
+
 Tech Stack
-Frontend: React Native (or Flutter if you prefer Dart)
+Frontend: React Native (or Flutter)
 
 Backend: Node.js with Express
 
-Voice APIs:
+Voice Interfaces:
 
-Web Speech API: For voice recognition and synthesis in real-time
+Web Speech API – Real-time voice recognition and synthesis
 
-OpenAI Whisper API: For accurate transcription (especially useful for complex or noisy commands)
+OpenAI Whisper API – High-accuracy transcription, especially in noisy environments or for fallback use
 
 Database: Firebase Firestore
 
@@ -15,59 +20,84 @@ State Management: Redux (or MobX as an alternative)
 
 Core Features
 1. Voice Command Activation
-Passive listening (toggleable for privacy)
+Toggleable passive listening for privacy
 
-Trigger phrases like: “Start recipe,” “Next step,” “Set timer for 5 minutes,” etc.
+Recognizes trigger phrases like:
 
-Whisper API fallback for offline/local use or higher accuracy
+“Start recipe”
+
+“Next step”
+
+“Set timer for 5 minutes”
+
+Uses Web Speech API for real-time interaction
+
+Whisper API used for enhanced accuracy or offline transcription
 
 2. Step-by-Step Cooking Instructions
-Fetch and read aloud one instruction at a time
+Instructions are fetched and read aloud one at a time
 
-Voice command: “Next,” “Repeat,” or “Go back”
+Supports commands like:
 
-Visual UI with progress tracking
+“Next”
+
+“Repeat”
+
+“Go back”
+
+Visual UI includes progress tracking for each recipe step
 
 3. Smart Timer Integration
-If instruction includes timing, automatically start a timer
+Automatically starts timers when recipe steps include durations
 
-Use voice prompts: “Timer done” → auto-transition to next step
+Timer responds to voice prompts:
 
-Option to say “Pause timer” or “Restart step”
+“Pause timer”
+
+“Restart step”
+
+“Timer done” → Proceeds to next instruction
 
 4. Voice-Saved Recipes
-Say “Save this recipe” or “I liked it”
+Save favorite recipes via voice commands:
 
-Store into Firestore under user’s saved list
+“Save this recipe”
 
-Can retrieve with “Show my saved recipes”
+“I liked it”
+
+Saved recipes are stored in Firebase Firestore under the user’s profile
+
+Retrieve via: “Show my saved recipes”
 
 5. Hands-Free Sharing
-Voice command like “Share this recipe with [contact/email]”
+Share recipes via voice:
 
-Uses Firebase Functions + email/WhatsApp API (optional)
+“Share this recipe with [contact/email]”
 
- System Architecture
-Frontend (React Native)
+Uses Firebase Functions with integration options like email or WhatsApp API
 
-Voice interface (Web Speech API)
+System Architecture
+Frontend (React Native/Flutter):
 
-Redux for app state: current step, timer, saved recipes
+Voice interface using Web Speech API
 
-Timer component with voice triggers
+Timer and recipe step UI with voice-enabled controls
 
-Firestore integration for data fetching/saving
+Redux for managing app state (steps, timers, saved recipes)
 
-Backend (Node.js + Express)
+Firebase Firestore for real-time data
 
-Whisper API integration for transcribing voice
+Backend (Node.js + Express):
 
-Recipe management APIs
+Whisper API integration for transcription
 
-Optional: Auth, analytics, sharing services
+APIs for recipe retrieval, user data management, and sharing
 
-Firebase Firestore
+Optional: Authentication, usage analytics, and cloud function triggers
 
-Stores recipes, user preferences, saved items
+Firebase Firestore:
 
-Could support real-time updates (e.g., collaborative cooking)
+Stores recipes, saved user data, and preferences
+
+Supports real-time updates, enabling collaborative cooking features in future versions
+
