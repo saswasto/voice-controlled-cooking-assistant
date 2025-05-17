@@ -63,41 +63,41 @@ Core Features
 
    “Save this recipe”
 
-“I liked it”
+   “I liked it”
 
-Saved recipes are stored in Firebase Firestore under the user’s profile
+   Saved recipes are stored in Firebase Firestore under the user’s profile
 
-Retrieve via: “Show my saved recipes”
+   Retrieve via: “Show my saved recipes”
 
 5. Hands-Free Sharing
-Share recipes via voice:
+   Share recipes via voice:
 
-“Share this recipe with [contact/email]”
+   “Share this recipe with [contact/email]”
 
-Uses Firebase Functions with integration options like email or WhatsApp API
+   Uses Firebase Functions with integration options like email or WhatsApp API
 
-System Architecture
-Frontend (React Native/Flutter):
+6.System Architecture
+   * Frontend (React Native/Flutter):
 
-Voice interface using Web Speech API
+     Voice interface using Web Speech API
 
-Timer and recipe step UI with voice-enabled controls
+     Timer and recipe step UI with voice-enabled controls
 
-Redux for managing app state (steps, timers, saved recipes)
+     Redux for managing app state (steps, timers, saved recipes)
 
-Firebase Firestore for real-time data
+     Firebase Firestore for real-time data
 
-Backend (Node.js + Express):
+  * Backend (Node.js + Express):
 
-Whisper API integration for transcription
+    Whisper API integration for transcription
 
-APIs for recipe retrieval, user data management, and sharing
+    APIs for recipe retrieval, user data management, and sharing
 
-Optional: Authentication, usage analytics, and cloud function triggers
+    Optional: Authentication, usage analytics, and cloud function triggers
 
-Firebase Firestore:
+7.Firebase Firestore:
 
-Stores recipes, saved user data, and preferences
+  Stores recipes, saved user data, and preferences
 
-Supports real-time updates, enabling collaborative cooking features in future versions
+  Supports real-time updates, enabling collaborative cooking features in future versions
 
