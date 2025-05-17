@@ -20,48 +20,48 @@ State Management: Redux (or MobX as an alternative)
 
 Core Features
 1. Voice Command Activation
-Toggleable passive listening for privacy
+   Toggleable passive listening for privacy
 
-Recognizes trigger phrases like:
+   Recognizes trigger phrases like:
 
-“Start recipe”
+   “Start recipe”
 
-“Next step”
+   “Next step”
 
-“Set timer for 5 minutes”
+   “Set timer for 5 minutes”
 
-Uses Web Speech API for real-time interaction
+    Uses Web Speech API for real-time interaction
 
-Whisper API used for enhanced accuracy or offline transcription
+    Whisper API used for enhanced accuracy or offline transcription
 
 2. Step-by-Step Cooking Instructions
-Instructions are fetched and read aloud one at a time
+   Instructions are fetched and read aloud one at a time
 
-Supports commands like:
+   Supports commands like:
 
-“Next”
+   “Next”
 
-“Repeat”
+   “Repeat”
 
-“Go back”
+   “Go back”
 
-Visual UI includes progress tracking for each recipe step
+    Visual UI includes progress tracking for each recipe step
 
 3. Smart Timer Integration
-Automatically starts timers when recipe steps include durations
+   Automatically starts timers when recipe steps include durations
 
-Timer responds to voice prompts:
+   Timer responds to voice prompts:
 
-“Pause timer”
+   “Pause timer”
 
-“Restart step”
+   “Restart step”
 
-“Timer done” → Proceeds to next instruction
+   “Timer done” → Proceeds to next instruction
 
 4. Voice-Saved Recipes
-Save favorite recipes via voice commands:
+   Save favorite recipes via voice commands:
 
-“Save this recipe”
+   “Save this recipe”
 
 “I liked it”
 
