@@ -4,22 +4,22 @@ Overview
 The Voice-Controlled Cooking Assistant is a cross-platform mobile application designed to deliver a truly hands-free cooking experience. Built with React Native (or Flutter), the app integrates advanced voice recognition and transcription technologies, allowing users to navigate recipes, set timers, and save or share their favorite dishes—all through natural voice commands.
 
 Tech Stack
-Frontend: React Native (or Flutter)
+ Frontend: React Native (or Flutter)
 
-Backend: Node.js with Express
+ Backend: Node.js with Express
 
 Voice Interfaces:
 
-Web Speech API – Real-time voice recognition and synthesis
+ Web Speech API – Real-time voice recognition and synthesis
 
-OpenAI Whisper API – High-accuracy transcription, especially in noisy environments or for fallback use
+ OpenAI Whisper API – High-accuracy transcription, especially in noisy environments or for fallback use
+ 
+ Database: Firebase Firestore
 
-Database: Firebase Firestore
-
-State Management: Redux (or MobX as an alternative)
+ State Management: Redux (or MobX as an alternative)
 
 Core Features
-1. Voice Command Activation
+ 1. Voice Command Activation
    Toggleable passive listening for privacy
 
    Recognizes trigger phrases like:
@@ -34,7 +34,7 @@ Core Features
 
     Whisper API used for enhanced accuracy or offline transcription
 
-2. Step-by-Step Cooking Instructions
+ 2. Step-by-Step Cooking Instructions
    Instructions are fetched and read aloud one at a time
 
    Supports commands like:
@@ -47,7 +47,7 @@ Core Features
 
     Visual UI includes progress tracking for each recipe step
 
-3. Smart Timer Integration
+ 3. Smart Timer Integration
    Automatically starts timers when recipe steps include durations
 
    Timer responds to voice prompts:
@@ -58,7 +58,7 @@ Core Features
 
    “Timer done” → Proceeds to next instruction
 
-4. Voice-Saved Recipes
+ 4. Voice-Saved Recipes
    Save favorite recipes via voice commands:
 
    “Save this recipe”
@@ -69,14 +69,14 @@ Core Features
 
    Retrieve via: “Show my saved recipes”
 
-5. Hands-Free Sharing
+ 5. Hands-Free Sharing
    Share recipes via voice:
 
    “Share this recipe with [contact/email]”
 
    Uses Firebase Functions with integration options like email or WhatsApp API
 
-6.System Architecture
+ 6.System Architecture
    * Frontend (React Native/Flutter):
 
      Voice interface using Web Speech API
@@ -95,7 +95,7 @@ Core Features
 
     Optional: Authentication, usage analytics, and cloud function triggers
 
-7.Firebase Firestore:
+ 7.Firebase Firestore:
 
   Stores recipes, saved user data, and preferences
 
